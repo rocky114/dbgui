@@ -12,9 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 qt_policy(SET QTP0001 NEW)
 
-add_subdirectory(src/app)
-add_subdirectory(src/qml)
-
+add_subdirectory(src)
 
 
 
