@@ -1,8 +1,30 @@
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-Window {
-    width: 640
+ApplicationWindow {
+    id: root
+    width: 500
     height: 480
     visible: true
-    title: qsTr("Hello World")
+
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 1
+        RowLayout {
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 30
+                color: "lightblue"
+            }
+        }
+
+        RowLayout {
+            Rectangle {
+                color: "lightgreen"
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
+    }
 }
