@@ -4,7 +4,7 @@ import QtQuick.Layouts
 
 ApplicationWindow {
     id: root
-    width: 500
+    width: 1000
     height: 480
     visible: true
 
@@ -22,6 +22,11 @@ ApplicationWindow {
         RowLayout {
             Rectangle {
                 color: "lightgreen"
+                Layout.preferredWidth: 120
+                Layout.fillHeight: true
+            }
+             Rectangle {
+                color: "red"
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
