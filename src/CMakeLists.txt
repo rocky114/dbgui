@@ -6,7 +6,8 @@ qt_add_qml_module(desktop
     URI myqmllib
     VERSION 1.0
     QML_FILES
-        qml/main.qml
+        qml/Main.qml
+        qml/DefaultContent.qml
 )
 
 target_link_libraries(desktop

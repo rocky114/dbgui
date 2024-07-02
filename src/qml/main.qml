@@ -10,25 +10,26 @@ ApplicationWindow {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 1
-        RowLayout {
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 30
-                color: "lightblue"
-            }
-        }
+        spacing: 2
 
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 30
+            color: "lightblue"
+        }
+        
         RowLayout {
+            spacing: 2
             Rectangle {
                 color: "lightgreen"
                 Layout.preferredWidth: 120
                 Layout.fillHeight: true
             }
-             Rectangle {
-                color: "red"
-                Layout.fillWidth: true
+            StackView {
+                id: stackView
                 Layout.fillHeight: true
+                Layout.fillWidth: true
+                initialItem: DefaultContent{}
             }
         }
     }
