@@ -16,7 +16,7 @@ ApplicationWindow {
             Rectangle {
                 id: databaseSelection
                 Layout.preferredWidth: 160
-                Layout.preferredHeight: 60
+                Layout.preferredHeight: 50
                 ComboBox {
                     anchors.left: parent.left
                     anchors.right: parent.right
@@ -24,6 +24,13 @@ ApplicationWindow {
                     anchors.margins: 2
                     model: ["Database 1", "Database 2", "Database 3"]
                 }
+
+                Text {
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "Select Database"
+                        font.pointSize: 15
+                    }
             }
             Rectangle {
                 Layout.preferredWidth: 160
