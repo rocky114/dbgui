@@ -7,7 +7,8 @@ qt_add_qml_module(desktop
     VERSION 1.0
     QML_FILES
         qml/Main.qml
-        qml/DefaultContent.qml
+        qml/Initial.qml
+        qml/Tables.qml
 )
 
 target_link_libraries(desktop
