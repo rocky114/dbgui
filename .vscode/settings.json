@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "*.cpp": "cpp",
-        "qguiapplication": "cpp"
+        "qguiapplication": "cpp",
+        "qobject": "cpp",
+        "qqmlapplicationengine": "cpp"
     },
     "cmake.buildDirectory": "${workspaceFolder}/out/build/database"
 }
