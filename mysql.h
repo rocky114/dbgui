@@ -1,20 +1,15 @@
 #ifndef MYSQL_H
 #define MYSQL_H
 
-#include <QObject>
-#include <QtQml/qqmlregistration.h>
+#include "abstractdatabase.h"
 
-class MySQL : public QObject
+class MySQL : public AbstractDatabase
 {
-    Q_OBJECT
-    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
-    QML_ELEMENT
 public:
-    QString name() const;
-    void setName(const QString &name);
+    QString dbType() override;
+    void setDbType(const QString &name) override;
 
 signals:
-    void nameChanged();
 
 private:
     QString m_name;

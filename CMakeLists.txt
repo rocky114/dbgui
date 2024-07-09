@@ -24,7 +24,7 @@ qt_add_qml_module(desktop
         qml/Initial.qml
         qml/Tables.qml
     SOURCES
-        mysql.h mysql.cpp
+        abstractdatabase.h mysql.h mysql.cpp
 )
 
 target_link_libraries(desktop PRIVATE

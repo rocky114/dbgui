@@ -1,12 +1,11 @@
 #include "mysql.h"
 #include <QDebug>
 
-QString MySQL::name() const
+QString MySQL::dbType()
 {
-    return QString{"mysql"};
+    return QStringLiteral("MySQL");
 }
 
-void MySQL::setName(const QString &name)
+void MySQL::setDbType(const QString &name)
 {
-    this->m_name = name;
 }
