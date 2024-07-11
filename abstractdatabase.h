@@ -12,10 +12,17 @@ class AbstractDatabase : public QObject
 
 public:
     virtual QString dbType() = 0;
-    virtual void setDbType(const QString &type) = 0;
+    virtual void setDbType(const QString &dbType) = 0;
+
+public slots:
+    virtual void connect() = 0;
+    virtual void disconnect() = 0;
 
 signals:
     void typeChanged();
+
+public:
+    QString m_type{};
 };
 
 #endif // DATABASE_H
