@@ -8,14 +8,19 @@ class MySQL : public AbstractDatabase
     Q_OBJECT
     QML_ELEMENT
     Q_PROPERTY(QString database READ getDatabase WRITE setDatabase NOTIFY databaseChanged)
+    Q_PROPERTY(QStringList databases READ getDatabases)
+
+public:
+    MySQL() {}
+
 public:
     QString dbType() override;
     void setDbType(const QString &type) override;
 
     Q_INVOKABLE QString getDatabase();
     Q_INVOKABLE void setDatabase(const QString &database);
-    Q_INVOKABLE QVector<QString> getDatabases();
-    Q_INVOKABLE QVector<QString> getTables();
+    Q_INVOKABLE QStringList getDatabases();
+    Q_INVOKABLE QStringList getTables();
 
 public slots:
     void connect() override;

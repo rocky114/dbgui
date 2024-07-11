@@ -28,12 +28,12 @@ void MySQL::setDatabase(const QString &database)
     m_database = database;
 }
 
-QVector<QString> MySQL::getDatabases()
+QStringList MySQL::getDatabases()
 {
-    return QVector<QString>{"mysql", "information_schema", "performance_schema", "test"};
+    return QStringList{"mysql", "information_schema", "performance_schema", "test"};
 }
 
-QVector<QString> MySQL::getTables()
+QStringList MySQL::getTables()
 {
-    return QVector<QString>{"user", "user_group", "user_group_user"};
+    return QStringList{"user", "user_group", "user_group_user"};
 }

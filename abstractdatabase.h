@@ -11,6 +11,9 @@ class AbstractDatabase : public QObject
     Q_PROPERTY(QString type READ dbType WRITE setDbType NOTIFY typeChanged)
 
 public:
+    AbstractDatabase() {}
+
+public:
     virtual QString dbType() = 0;
     virtual void setDbType(const QString &dbType) = 0;
 

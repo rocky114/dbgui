@@ -1,12 +1,17 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import rocky.database
 
 ApplicationWindow {
     id: root
     width: 1200
     height: 600
     visible: true
+
+    MySQL {
+        id: mysql
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -17,12 +22,13 @@ ApplicationWindow {
                 id: databaseSelection
                 Layout.preferredWidth: 160
                 Layout.preferredHeight: 50
+
                 ComboBox {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.margins: 2
-                    model: ["Database 1", "Database 2", "Database 3"]
+                    model: mysql.getDatabases()
                 }
 
                 Text {
