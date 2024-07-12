@@ -1,17 +1,24 @@
 #include "mysql.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QDebug>
-
-QString MySQL::dbType()
-{
-    return QStringLiteral("MySQL");
-}
-
-void MySQL::setDbType(const QString &name)
-{
-}
+#include <QSqlError>
 
 void MySQL::connect()
 {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("127.0.0.1");
+    db.setDatabaseName("test");
+    db.setUserName("root");
+    db.setPassword("123456");
+
+    if (!db.open())
+    {
+        qDebug() << "Cannot open database: " << db.lastError().text();
+        return;
+    }
+
+    qInfo() << "connect successfully";
 }
 
 void MySQL::disconnect()
@@ -30,6 +37,8 @@ void MySQL::setDatabase(const QString &database)
 
 QStringList MySQL::getDatabases()
 {
+    this->connect();
+
     return QStringList{"mysql", "information_schema", "performance_schema", "test"};
 }
 

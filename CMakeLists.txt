@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(database-desktop VERSION 0.1 LANGUAGES CXX)
 
-find_package(Qt6 6.5 COMPONENTS Core Gui Qml Quick REQUIRED)
+find_package(Qt6 6.5 COMPONENTS Core Gui Qml Quick Sql REQUIRED)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -24,7 +24,7 @@ qt_add_qml_module(desktop
         qml/Initial.qml
         qml/Tables.qml
     SOURCES
-        abstractdatabase.h mysql.h mysql.cpp
+        mysql.h mysql.cpp
 )
 
 target_link_libraries(desktop PRIVATE
@@ -32,6 +32,7 @@ target_link_libraries(desktop PRIVATE
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
+    Qt6::Sql
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

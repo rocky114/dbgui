@@ -21,7 +21,11 @@
         "ratio": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "qsqldatabase": "cpp",
+        "qsqlquery": "cpp",
+        "qdebug": "cpp",
+        "qsqlerror": "cpp"
     },
     "cmake.buildDirectory": "${workspaceFolder}/out/build/database"
 }

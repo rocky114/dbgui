@@ -1,9 +1,10 @@
 #ifndef MYSQL_H
 #define MYSQL_H
 
-#include "abstractdatabase.h"
+#include <QObject>
+#include <QtQml/qqmlregistration.h>
 
-class MySQL : public AbstractDatabase
+class MySQL : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -11,20 +12,17 @@ class MySQL : public AbstractDatabase
     Q_PROPERTY(QStringList databases READ getDatabases)
 
 public:
-    MySQL() {}
+    // MySQL() {}
 
 public:
-    QString dbType() override;
-    void setDbType(const QString &type) override;
-
     Q_INVOKABLE QString getDatabase();
     Q_INVOKABLE void setDatabase(const QString &database);
     Q_INVOKABLE QStringList getDatabases();
     Q_INVOKABLE QStringList getTables();
 
 public slots:
-    void connect() override;
-    void disconnect() override;
+    void connect();
+    void disconnect();
 
 signals:
     void databaseChanged();
