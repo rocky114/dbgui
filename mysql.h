@@ -9,10 +9,14 @@ class MySQL : public QObject
     Q_OBJECT
     QML_ELEMENT
     Q_PROPERTY(QString database READ getDatabase WRITE setDatabase NOTIFY databaseChanged)
-    Q_PROPERTY(QStringList databases READ getDatabases)
+    Q_PROPERTY(QString dsn READ getDSN WRITE setDSN NOTIFY dsnChanged)
+    // Q_PROPERTY(QStringList databases READ getDatabases)
 
 public:
-    // MySQL() {}
+    MySQL();
+
+    QString getDSN();
+    void setDSN(QString dsn);
 
 public:
     Q_INVOKABLE QString getDatabase();
@@ -26,9 +30,11 @@ public slots:
 
 signals:
     void databaseChanged();
+    void dsnChanged();
 
 private:
     QString m_database{};
+    QString m_dsn{};
 };
 
 #endif // LOGINSERVICE_H

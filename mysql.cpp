@@ -4,11 +4,28 @@
 #include <QDebug>
 #include <QSqlError>
 
+MySQL::MySQL()
+{
+    this->connect();
+}
+
+QString MySQL::getDSN()
+{
+    return m_dsn;
+}
+
+void MySQL::setDSN(QString dsn)
+{
+    this->m_dsn = dsn;
+}
+
 void MySQL::connect()
 {
+    emit dsnChanged();
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
-    db.setDatabaseName("test");
+    // db.setDatabaseName("test");
     db.setUserName("root");
     db.setPassword("123456");
 
@@ -37,8 +54,6 @@ void MySQL::setDatabase(const QString &database)
 
 QStringList MySQL::getDatabases()
 {
-    this->connect();
-
     return QStringList{"mysql", "information_schema", "performance_schema", "test"};
 }
 
