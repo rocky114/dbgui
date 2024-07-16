@@ -3,6 +3,6 @@ import QtQuick.Layouts
 
 Rectangle {
     color: "lightgreen"
-    Layout.preferredWidth: 160
+    Layout.preferredWidth: 200
     Layout.fillHeight: true
 }

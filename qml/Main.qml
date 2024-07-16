@@ -20,7 +20,7 @@ ApplicationWindow {
         RowLayout {
             Rectangle {
                 id: database
-                Layout.preferredWidth: 160
+                Layout.preferredWidth: 200
                 Layout.preferredHeight: 50
 
                 ComboBox {
@@ -34,6 +34,11 @@ ApplicationWindow {
                         RowLayout {
                             Text {
                                 text: model.name
+                                font.pixelSize: 14
+                                Layout.leftMargin: 10
+                                Layout.topMargin: 2 // 设置文本的上边距为 10 像素
+                                Layout.bottomMargin: 2 // 设置文本的下边距为 10 像素
+                                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             }
                         }
                     }
@@ -47,7 +52,7 @@ ApplicationWindow {
                 }
             }
             Rectangle {
-                Layout.preferredWidth: 160
+                Layout.preferredWidth: 200
                 Layout.preferredHeight: database.height
                 color: "#00ff00"
             }
@@ -66,19 +71,13 @@ ApplicationWindow {
     }
 
     property var databaseModel: ListModel {
-        //ListElement { name: "mysql" }
+        ListElement { name: "选择数据库" }
     }
 
     Component.onCompleted: {
-        const databases = getDatabases();
         for (const database of mysql.getDatabases()) {
-            console.log(database);
             databaseModel.append({ name: database });
         }
-    }
-
-    function getDatabases() {
-        return mysql.getDatabases();
     }
 }
 
