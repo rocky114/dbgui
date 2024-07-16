@@ -19,7 +19,7 @@ ApplicationWindow {
 
         RowLayout {
             Rectangle {
-                id: databaseSelection
+                id: database
                 Layout.preferredWidth: 160
                 Layout.preferredHeight: 50
 
@@ -28,19 +28,27 @@ ApplicationWindow {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.margins: 2
-                    model: mysql.getDatabases()
+                    model: databaseModel
+
+                    delegate: Component {
+                        RowLayout {
+                            Text {
+                                text: model.name
+                            }
+                        }
+                    }
                 }
 
                 Text {
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: "Select Database"
-                        font.pointSize: 15
-                    }
+                    anchors.bottom: parent.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Select Database"
+                    font.pointSize: 15
+                }
             }
             Rectangle {
                 Layout.preferredWidth: 160
-                Layout.preferredHeight: databaseSelection.height
+                Layout.preferredHeight: database.height
                 color: "#00ff00"
             }
         }
@@ -56,4 +64,21 @@ ApplicationWindow {
             }
         }
     }
+
+    property var databaseModel: ListModel {
+        //ListElement { name: "mysql" }
+    }
+
+    Component.onCompleted: {
+        const databases = getDatabases();
+        for (const database of mysql.getDatabases()) {
+            console.log(database);
+            databaseModel.append({ name: database });
+        }
+    }
+
+    function getDatabases() {
+        return mysql.getDatabases();
+    }
 }
+
