@@ -1,6 +1,7 @@
 #include "mysql.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlError>
 
@@ -52,9 +53,24 @@ void MySQL::setDatabase(const QString &database)
     m_database = database;
 }
 
-QStringList MySQL::getDatabases()
+QSqlQueryModel *MySQL::getDatabases()
 {
-    return QStringList{"mysql", "information_schema", "performance_schema", "test"};
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("show databases");
+    model->setHeaderData(0, Qt::Horizontal, tr("database"));
+
+    for (int row = 0; row < model->rowCount(); ++row)
+    {
+        for (int column = 0; column < model->columnCount(); ++column)
+        {
+            QModelIndex index = model->index(row, column);
+            QVariant data = model->data(index);
+            qDebug() << data.toString();
+        }
+    }
+    return model;
+
+    // return QStringList{"mysql", "information_schema", "performance_schema", "test"};
 }
 
 QStringList MySQL::getTables()

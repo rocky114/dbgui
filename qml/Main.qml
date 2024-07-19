@@ -24,22 +24,21 @@ ApplicationWindow {
                 Layout.preferredHeight: 50
 
                 ComboBox {
+                    id: comboBox
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.margins: 2
-                    model: databaseModel
+                    model: mysql.databases
 
-                    delegate: Component {
-                        RowLayout {
-                            Text {
-                                text: model.name
-                                font.pixelSize: 14
-                                Layout.leftMargin: 10
-                                Layout.topMargin: 2 // 设置文本的上边距为 10 像素
-                                Layout.bottomMargin: 2 // 设置文本的下边距为 10 像素
-                                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                            }
+                    delegate: Item {
+                        width: comboBox.width
+                        height: 20
+
+                        Text {
+                            anchors.centerIn: parent
+                            font.pixelSize: 14
+                            text: modelData // 使用 modelData 来访问数据
                         }
                     }
                 }
@@ -75,9 +74,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        for (const database of mysql.getDatabases()) {
-            databaseModel.append({ name: database });
-        }
+        console.log("echo database")
     }
+
 }
 
