@@ -32,9 +32,6 @@ ApplicationWindow {
                         ListElement {name: "mysql"}
                         ListElement {name: "myssql"}
                     }
-                    //displayText: "选择数据库"
-                    //displayTextRole: "name" // 添加这一行
-                    //valueRole: "name"
                     currentIndex: 0
                     onCurrentIndexChanged: {
                         console.log("Current index changed:", currentIndex, "Text:", currentText)
@@ -48,6 +45,12 @@ ApplicationWindow {
                         width: comboBox.width
                         height: 20
 
+                        Text {
+                            anchors.left: parent.left
+                            anchors.leftMargin: 10
+                            font.pixelSize: 14
+                            text: model.name // 使用 modelData 来访问数据
+                        }
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
@@ -55,16 +58,10 @@ ApplicationWindow {
                                 comboBox.displayText = comboBox.model.get(index).name
                             }
                         }
-
-                        Text {
-                            anchors.fill: parent
-                            font.pixelSize: 14
-                            text: model.name // 使用 modelData 来访问数据
-                            padding: 10 // 设置左边距为 2
-                        }
                     }
                 }
             }
+
             Rectangle {
                 Layout.preferredWidth: 200
                 Layout.preferredHeight: database.height
