@@ -20,34 +20,49 @@ ApplicationWindow {
         RowLayout {
             Rectangle {
                 id: database
-                Layout.preferredWidth: 200
-                Layout.preferredHeight: 50
+                width: 200
+                height: 50
 
                 ComboBox {
                     id: comboBox
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.margins: 2
-                    model: mysql.databases
+                    anchors.fill: parent
+                    model: ListModel {
+                        id: databaseModel
+                        ListElement {name: "test"}
+                        ListElement {name: "mysql"}
+                        ListElement {name: "myssql"}
+                    }
+                    //displayText: "选择数据库"
+                    //displayTextRole: "name" // 添加这一行
+                    //valueRole: "name"
+                    currentIndex: 0
+                    onCurrentIndexChanged: {
+                        console.log("Current index changed:", currentIndex, "Text:", currentText)
+                    }
+
+                    onActivated: {
+                        var selectedDatabase = comboBox.model.get(currentIndex).name
+                    }
 
                     delegate: Item {
                         width: comboBox.width
                         height: 20
 
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                comboBox.currentIndex = index // 修改当前值为代理的索引值
+                                comboBox.displayText = comboBox.model.get(index).name
+                            }
+                        }
+
                         Text {
-                            anchors.centerIn: parent
+                            anchors.fill: parent
                             font.pixelSize: 14
-                            text: modelData // 使用 modelData 来访问数据
+                            text: model.name // 使用 modelData 来访问数据
+                            padding: 10 // 设置左边距为 2
                         }
                     }
-                }
-
-                Text {
-                    anchors.bottom: parent.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Select Database"
-                    font.pointSize: 15
                 }
             }
             Rectangle {
@@ -59,23 +74,14 @@ ApplicationWindow {
 
         RowLayout {
             spacing: 2
-            Tables{}
+            Tables {}
             StackView {
                 id: stackView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                initialItem: Initial{}
+                initialItem: Initial {}
             }
         }
     }
-
-    property var databaseModel: ListModel {
-        ListElement { name: "选择数据库" }
-    }
-
-    Component.onCompleted: {
-        console.log("echo database")
-    }
-
 }
 

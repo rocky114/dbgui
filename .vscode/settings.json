@@ -25,7 +25,12 @@
         "qsqldatabase": "cpp",
         "qsqlquery": "cpp",
         "qdebug": "cpp",
-        "qsqlerror": "cpp"
+        "qsqlerror": "cpp",
+        "*.qml": "qml"
     },
-    "cmake.buildDirectory": "${workspaceFolder}/out/build/database"
+    "cmake.buildDirectory": "${workspaceFolder}/out/build/database",
+    "qmlformat.effectLanguages": [
+        "qml"
+    ],
+    "editor.formatOnSave": true,
 }

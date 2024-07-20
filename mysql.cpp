@@ -59,18 +59,7 @@ QSqlQueryModel *MySQL::getDatabases()
     model->setQuery("show databases");
     model->setHeaderData(0, Qt::Horizontal, tr("database"));
 
-    for (int row = 0; row < model->rowCount(); ++row)
-    {
-        for (int column = 0; column < model->columnCount(); ++column)
-        {
-            QModelIndex index = model->index(row, column);
-            QVariant data = model->data(index);
-            qDebug() << data.toString();
-        }
-    }
     return model;
-
-    // return QStringList{"mysql", "information_schema", "performance_schema", "test"};
 }
 
 QStringList MySQL::getTables()
