@@ -20,18 +20,15 @@ ApplicationWindow {
         RowLayout {
             Rectangle {
                 id: database
-                width: 200
-                height: 50
+                Layout.preferredWidth: 200
+                Layout.preferredHeight: 50
 
                 ComboBox {
                     id: comboBox
-                    anchors.fill: parent
-                    model: ListModel {
-                        id: databaseModel
-                        ListElement {name: "test"}
-                        ListElement {name: "mysql"}
-                        ListElement {name: "myssql"}
-                    }
+                    anchors.top: parent.top
+                    anchors.topMargin: 5
+                    width: parent.width
+                    model: mysql.databases
                     currentIndex: 0
                     onCurrentIndexChanged: {
                         console.log("Current index changed:", currentIndex, "Text:", currentText)
@@ -49,13 +46,12 @@ ApplicationWindow {
                             anchors.left: parent.left
                             anchors.leftMargin: 10
                             font.pixelSize: 14
-                            text: model.name // 使用 modelData 来访问数据
+                            text: modelData // 使用 modelData 来访问数据
                         }
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
                                 comboBox.currentIndex = index // 修改当前值为代理的索引值
-                                comboBox.displayText = comboBox.model.get(index).name
                             }
                         }
                     }
