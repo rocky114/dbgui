@@ -4,10 +4,16 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlError>
+#include <QSqlRecord>
 
 MySQL::MySQL()
 {
     this->connect();
+}
+
+MySQL::~MySQL()
+{
+    this->disconnect();
 }
 
 QString MySQL::getDSN()
@@ -22,17 +28,15 @@ void MySQL::setDSN(QString dsn)
 
 void MySQL::connect()
 {
-    emit dsnChanged();
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
+    QSqlDatabase m_connection = QSqlDatabase::addDatabase("QMYSQL");
+    m_connection.setHostName("127.0.0.1");
     // db.setDatabaseName("test");
-    db.setUserName("root");
-    db.setPassword("123456");
+    m_connection.setUserName("root");
+    m_connection.setPassword("123456");
 
-    if (!db.open())
+    if (!m_connection.open())
     {
-        qDebug() << "Cannot open database: " << db.lastError().text();
+        qDebug() << "Cannot open database: " << m_connection.lastError().text();
         return;
     }
 
@@ -41,6 +45,7 @@ void MySQL::connect()
 
 void MySQL::disconnect()
 {
+    m_connection.close();
 }
 
 QString MySQL::getDatabase()
@@ -64,5 +69,21 @@ QSqlQueryModel *MySQL::getDatabases()
 
 QStringList MySQL::getTables()
 {
-    return QStringList{"user", "user_group", "user_group_user"};
+    QSqlQuery query;
+    query.prepare("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = :database");
+    query.bindValue(":database", m_database);
+
+    if (!query.exec())
+    {
+        qDebug() << "Failed to execute query";
+        return {};
+    }
+
+    QStringList ret{};
+    while (query.next())
+    {
+        ret.append(query.record().value("TABLE_NAME").toString());
+    }
+
+    return ret;
 }

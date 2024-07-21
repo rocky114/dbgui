@@ -22,6 +22,7 @@ qt_add_qml_module(desktop
     QML_FILES
         qml/Main.qml
         qml/Initial.qml
+        qml/Databases.qml
         qml/Tables.qml
     SOURCES
         mysql.h mysql.cpp

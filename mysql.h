@@ -9,12 +9,13 @@ class MySQL : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
-    Q_PROPERTY(QString database READ getDatabase WRITE setDatabase NOTIFY databaseChanged)
     Q_PROPERTY(QString dsn READ getDSN WRITE setDSN NOTIFY dsnChanged)
+    Q_PROPERTY(QString database READ getDatabase WRITE setDatabase NOTIFY databaseChanged)
     Q_PROPERTY(QSqlQueryModel *databases READ getDatabases NOTIFY databasesChanged)
 
 public:
     MySQL();
+    ~MySQL();
 
     QString getDSN();
     void setDSN(QString dsn);
@@ -40,6 +41,7 @@ private:
     QString m_dsn{};
 
     QSqlQueryModel *m_databases;
+    QSqlDatabase m_connection;
 };
 
 #endif // LOGINSERVICE_H
