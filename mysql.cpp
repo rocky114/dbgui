@@ -55,7 +55,31 @@ QString MySQL::getDatabase()
 
 void MySQL::setDatabase(const QString &database)
 {
+    qDebug() << "current database" << database;
+
     m_database = database;
+
+    QSqlQuery query;
+    query.prepare("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = :database");
+    query.bindValue(":database", m_database);
+
+    if (!query.exec())
+    {
+        qDebug() << "Failed to execute query";
+        return;
+    }
+
+    QStringList ret{};
+    while (query.next())
+    {
+        ret.append(query.record().value("TABLE_NAME").toString());
+    }
+
+    this->m_tables = ret;
+
+    // qDebug() << "current tables" << m_tables;
+
+    return;
 }
 
 QSqlQueryModel *MySQL::getDatabases()
@@ -69,21 +93,5 @@ QSqlQueryModel *MySQL::getDatabases()
 
 QStringList MySQL::getTables()
 {
-    QSqlQuery query;
-    query.prepare("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = :database");
-    query.bindValue(":database", m_database);
-
-    if (!query.exec())
-    {
-        qDebug() << "Failed to execute query";
-        return {};
-    }
-
-    QStringList ret{};
-    while (query.next())
-    {
-        ret.append(query.record().value("TABLE_NAME").toString());
-    }
-
-    return ret;
+    return this->m_tables;
 }

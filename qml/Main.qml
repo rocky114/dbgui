@@ -11,6 +11,9 @@ ApplicationWindow {
 
     MySQL {
         id: mysql
+        onDatabaseChanged: {
+            console.log("main database changed")
+        }
     }
 
     ColumnLayout {
@@ -18,7 +21,9 @@ ApplicationWindow {
         spacing: 2
 
         RowLayout {
-            Databases {}
+            Databases {
+                id: databasesContainer
+            }
 
             Rectangle {
                 Layout.preferredWidth: 200
@@ -29,7 +34,9 @@ ApplicationWindow {
 
         RowLayout {
             spacing: 2
-            Tables {}
+            Tables {
+                id: tablesContainer
+            }
             StackView {
                 id: stackView
                 Layout.fillHeight: true

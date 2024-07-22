@@ -16,6 +16,10 @@ Rectangle {
         currentIndex: 0
         onCurrentIndexChanged: {
             mysql.database = currentText
+
+            // emit signal
+            tablesContainer.updatedTables()
+
             console.log("Current index changed:", currentIndex, "Text:", currentText)
         }
 
