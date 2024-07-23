@@ -26,6 +26,8 @@ qt_add_qml_module(desktop
         qml/Tables.qml
     SOURCES
         mysql.h mysql.cpp
+    RESOURCES
+        icons/table-small@2x.png
 )
 
 target_link_libraries(desktop PRIVATE
