@@ -12,15 +12,19 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 5
         width: parent.width
-        model: mysql.databases
+        model: ListModel {
+            id: databasesModel
+            ListElement {name: "选择数据库"}
+        }
         currentIndex: 0
         onCurrentIndexChanged: {
+        }
+
+        onCurrentTextChanged: {
             mysql.database = currentText
 
             // emit signal
             tablesContainer.updatedTables()
-
-            console.log("Current index changed:", currentIndex, "Text:", currentText)
         }
 
         delegate: Item {
@@ -37,8 +41,14 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     comboBox.currentIndex = index // 修改当前值为代理的索引值
+                    comboBox.popup.close()
                 }
             }
+        }
+
+
+        Component.onCompleted: {
+            mysql.getDatabases().forEach((elem, index) => {databasesModel.append({name: elem})})
         }
     }
 }

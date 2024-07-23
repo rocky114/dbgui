@@ -11,9 +11,6 @@ ApplicationWindow {
 
     MySQL {
         id: mysql
-        onDatabaseChanged: {
-            console.log("main database changed")
-        }
     }
 
     ColumnLayout {

@@ -11,21 +11,19 @@ class MySQL : public QObject
     QML_ELEMENT
     Q_PROPERTY(QString dsn READ getDSN WRITE setDSN NOTIFY dsnChanged)
     Q_PROPERTY(QString database READ getDatabase WRITE setDatabase NOTIFY databaseChanged)
-    Q_PROPERTY(QSqlQueryModel *databases READ getDatabases NOTIFY databasesChanged)
-    Q_PROPERTY(QStringList tables READ getTables NOTIFY tablesChanged)
 public:
     MySQL();
     ~MySQL();
 
     QString getDSN();
     void setDSN(QString dsn);
-    QSqlQueryModel *getDatabases();
-    QStringList getTables();
+
     QString getDatabase();
     void setDatabase(const QString &database);
 
 public:
-    // Q_INVOKABLE QStringList getDatabases();
+    Q_INVOKABLE QStringList getDatabases();
+    Q_INVOKABLE QStringList getTables();
 
 public slots:
     void connect();
@@ -33,17 +31,13 @@ public slots:
 
 signals:
     void dsnChanged();
-    void databasesChanged();
     void databaseChanged();
-    void tablesChanged();
 
 private:
     QString m_database{};
     QString m_dsn{};
 
-    QSqlQueryModel *m_databases;
     QSqlDatabase m_connection;
-    QStringList m_tables{};
 };
 
 #endif // LOGINSERVICE_H

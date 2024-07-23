@@ -55,9 +55,37 @@ QString MySQL::getDatabase()
 
 void MySQL::setDatabase(const QString &database)
 {
-    qDebug() << "current database" << database;
-
     m_database = database;
+
+    return;
+}
+
+QStringList MySQL::getDatabases()
+{
+    QStringList ret{};
+
+    QSqlQuery query;
+
+    if (!query.exec("SHOW DATABASES"))
+    {
+        qDebug() << "Failed to execute query";
+
+        return ret;
+    }
+
+    while (query.next())
+    {
+        ret.append(query.record().value("Database").toString());
+    }
+
+    // qDebug() << "databases" << ret;
+
+    return ret;
+}
+
+QStringList MySQL::getTables()
+{
+    QStringList ret{};
 
     QSqlQuery query;
     query.prepare("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = :database");
@@ -66,32 +94,13 @@ void MySQL::setDatabase(const QString &database)
     if (!query.exec())
     {
         qDebug() << "Failed to execute query";
-        return;
+        return ret;
     }
 
-    QStringList ret{};
     while (query.next())
     {
         ret.append(query.record().value("TABLE_NAME").toString());
     }
 
-    this->m_tables = ret;
-
-    // qDebug() << "current tables" << m_tables;
-
-    return;
-}
-
-QSqlQueryModel *MySQL::getDatabases()
-{
-    QSqlQueryModel *model = new QSqlQueryModel;
-    model->setQuery("show databases");
-    model->setHeaderData(0, Qt::Horizontal, tr("database"));
-
-    return model;
-}
-
-QStringList MySQL::getTables()
-{
-    return this->m_tables;
+    return ret;
 }

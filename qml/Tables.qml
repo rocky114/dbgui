@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 
 Rectangle {
+    id: tables
     color: "lightgreen"
     Layout.preferredWidth: 200
     Layout.fillHeight: true
@@ -9,9 +10,8 @@ Rectangle {
     signal updatedTables()
 
     onUpdatedTables: {
-        console.log("tables changed")
         tableModel.clear()
-        mysql.tables.forEach((elem, index) => {tableModel.append({name: elem})})
+        mysql.getTables().forEach((elem, index) => {tableModel.append({name: elem})})
     }
 
     ListView {
@@ -23,7 +23,7 @@ Rectangle {
         }
 
         delegate: Item {
-            width: parent.width
+            width: 200
             height: 20
 
             Text {
