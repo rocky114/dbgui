@@ -17,13 +17,13 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 2
 
-        Toolbar {
-
-        }
-
         RowLayout {
             Databases {
                 id: databasesContainer
+            }
+
+            Toolbar {
+                id: toolbarContainer
             }
 
             Rectangle {
