@@ -4,15 +4,18 @@ import QtQuick.Layouts
 import rocky.database
 
 ApplicationWindow {
-    id: window
-    width: 1200
+    id: root
+
+    readonly property int toolbarHeight: 50
+
     height: 600
     visible: true
+    width: 1200
 
     MySQL {
         id: mysql
-    }
 
+    }
     ColumnLayout {
         anchors.fill: parent
         spacing: 2
@@ -20,31 +23,34 @@ ApplicationWindow {
         RowLayout {
             Databases {
                 id: databasesContainer
-            }
 
+            }
             Toolbar {
                 id: toolbarContainer
-            }
 
+            }
             Rectangle {
-                Layout.preferredWidth: 200
                 Layout.preferredHeight: 50
+                Layout.preferredWidth: 200
                 color: "#00ff00"
             }
         }
-
         RowLayout {
             spacing: 2
+
             Tables {
                 id: tablesContainer
+
             }
             StackView {
                 id: stackView
+
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                initialItem: Initial {}
+
+                initialItem: Initial {
+                }
             }
         }
     }
 }
-

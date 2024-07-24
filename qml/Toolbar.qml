@@ -3,7 +3,7 @@ import QtQuick.Layouts
 
 Rectangle {
     Layout.preferredWidth: 60
-    Layout.preferredHeight: 50
+    Layout.preferredHeight: root.toolbarHeight
 
     ColumnLayout {
         anchors.fill: parent

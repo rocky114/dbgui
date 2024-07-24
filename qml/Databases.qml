@@ -3,9 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
-    id: database
     Layout.preferredWidth: 200
-    Layout.preferredHeight: 50
+    Layout.preferredHeight: root.toolbarHeight
 
     ComboBox {
         id: comboBox
