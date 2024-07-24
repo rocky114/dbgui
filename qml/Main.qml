@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import rocky.database
 
 ApplicationWindow {
-    id: root
+    id: window
     width: 1200
     height: 600
     visible: true
@@ -16,6 +16,10 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         spacing: 2
+
+        Toolbar {
+
+        }
 
         RowLayout {
             Databases {

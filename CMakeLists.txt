@@ -21,13 +21,16 @@ qt_add_qml_module(desktop
     VERSION 1.0
     QML_FILES
         qml/Main.qml
+        qml/Toolbar.qml
         qml/Initial.qml
         qml/Databases.qml
         qml/Tables.qml
+        qml/Query.qml
     SOURCES
         mysql.h mysql.cpp
     RESOURCES
         icons/table-small@2x.png
+        icons/toolbar-switch-to-sql@2x.png
 )
 
 target_link_libraries(desktop PRIVATE
