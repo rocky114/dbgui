@@ -1,42 +1,56 @@
 import QtQuick
 import QtQuick.Controls
 
-Item {
-    width: 400
-    height: 300
+Rectangle {
+    // 根据行数更新行号宽度
+    function updateLineNumberWidth() {
+        if (textEdit.lineCount > 9) {
+            let length = String(textEdit.lineCount).length;
+            lineNumbers.width = root.lineNumberWidth + (length - 1) * 6;
+        }
+    }
 
-    Rectangle {
+    color: "lightgray"
+
+    Row {
+        id: query
+
         anchors.fill: parent
-        color: "lightgray"
+        spacing: 5
 
-        Row {
-            anchors.fill: parent
-            spacing: 10
+        Column {
+            id: lineNumbers
 
-            // 行号显示
-            Column {
-                id: lineNumbers
-                width: 30
-                Repeater {
-                    model: textEdit.lineCount
-                    Text {
-                        text: index + 1
-                        color: "gray"
-                        font.bold: true
-                        anchors.right: parent.right
-                        anchors.rightMargin: 5
-                    }
+            width: root.lineNumberWidth
+
+            Repeater {
+                model: textEdit.lineCount
+
+                Text {
+                    id: numberText
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    color: "gray"
+                    font.pixelSize: 14
+                    height: textEdit.cursorRectangle.height
+                    horizontalAlignment: Text.AlignRight
+                    text: index + 1
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
+        }
 
-            // 文本编辑区域
-            TextEdit {
-                id: textEdit
-                width: parent.width - lineNumbers.width - 10
-                height: parent.height
-                font.pixelSize: 16
-                wrapMode: TextEdit.WrapWord
-            }
+        // 文本编辑区域
+        TextEdit {
+            id: textEdit
+
+            anchors.leftMargin: 10
+            font.pixelSize: 16
+            height: parent.height
+            width: parent.width - lineNumbers.width - 10
+
+            onLineCountChanged: updateLineNumberWidth() // 监听行数变化
         }
     }
 }

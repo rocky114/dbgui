@@ -6,6 +6,8 @@ import rocky.database
 ApplicationWindow {
     id: root
 
+    readonly property int lineNumberWidth: 15
+    readonly property int tableNavWidth: 200
     readonly property int toolbarHeight: 50
 
     height: 600
@@ -48,7 +50,7 @@ ApplicationWindow {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                initialItem: Initial {
+                initialItem: Query {
                 }
             }
         }
