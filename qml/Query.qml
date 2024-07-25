@@ -32,6 +32,7 @@ Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     color: "gray"
+                    font.family: "Courier New"
                     font.pixelSize: 14
                     height: textEdit.cursorRectangle.height
                     horizontalAlignment: Text.AlignRight
