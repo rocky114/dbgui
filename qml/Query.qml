@@ -66,6 +66,7 @@ ColumnLayout {
     Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
+        color: "transparent"
 
         TableView {
             anchors.fill: parent
