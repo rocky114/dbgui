@@ -1,57 +1,122 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
+import Qt.labs.qmlmodels
 
-Rectangle {
+ColumnLayout {
     // 根据行数更新行号宽度
     function updateLineNumberWidth() {
         if (textEdit.lineCount > 9) {
             let length = String(textEdit.lineCount).length;
             lineNumbers.width = root.lineNumberWidth + (length - 1) * 6;
+        } else {
+            lineNumbers.width = root.lineNumberWidth;
         }
     }
 
-    color: "lightgray"
+    //color: "lightgray"
+    Rectangle {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-    Row {
-        id: query
+        Row {
+            id: query
 
-        anchors.fill: parent
-        spacing: 5
+            height: parent.height / 2
+            spacing: 5
+            width: parent.width
 
-        Column {
-            id: lineNumbers
+            Column {
+                id: lineNumbers
 
-            width: root.lineNumberWidth
+                width: root.lineNumberWidth
 
-            Repeater {
-                model: textEdit.lineCount
+                Repeater {
+                    model: textEdit.lineCount
 
-                Text {
-                    id: numberText
+                    Text {
+                        id: numberText
 
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    color: "gray"
-                    font.family: "Courier New"
-                    font.pixelSize: 14
-                    height: textEdit.cursorRectangle.height
-                    horizontalAlignment: Text.AlignRight
-                    text: index + 1
-                    verticalAlignment: Text.AlignVCenter
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        color: "gray"
+                        font.family: "Courier New"
+                        font.pixelSize: 14
+                        height: textEdit.cursorRectangle.height
+                        horizontalAlignment: Text.AlignRight
+                        text: index + 1
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
+
+            // 文本编辑区域
+            TextEdit {
+                id: textEdit
+
+                anchors.leftMargin: 10
+                font.pixelSize: 16
+                height: parent.height
+                width: parent.width - lineNumbers.width - 10
+
+                onLineCountChanged: updateLineNumberWidth() // 监听行数变化
+            }
         }
+    }
+    Rectangle {
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-        // 文本编辑区域
-        TextEdit {
-            id: textEdit
+        TableView {
+            anchors.fill: parent
 
-            anchors.leftMargin: 10
-            font.pixelSize: 16
-            height: parent.height
-            width: parent.width - lineNumbers.width - 10
+            //clip: true
+            columnSpacing: 1
+            rowSpacing: 1
 
-            onLineCountChanged: updateLineNumberWidth() // 监听行数变化
+            ScrollBar.horizontal: ScrollBar {
+            }
+            ScrollBar.vertical: ScrollBar {
+            }
+            delegate: Rectangle {
+                border.color: "#CCCCCC" // 设置边框颜色为 #CCCCCC
+                border.width: 1
+                implicitHeight: 50
+                implicitWidth: 100
+
+                Text {
+                    anchors.centerIn: parent
+                    text: display
+                }
+                MouseArea {
+                    anchors.fill: parent
+
+                    //onClicked: parent.model.value = !parent.value
+                }
+            }
+            model: TableModel {
+                rows: [
+                    {
+                        "name": "cat",
+                        "color": "black"
+                    },
+                    {
+                        "name": "dog",
+                        "color": "brown"
+                    },
+                    {
+                        "name": "bird",
+                        "color": "white"
+                    }
+                ]
+
+                TableModelColumn {
+                    display: "name"
+                }
+                TableModelColumn {
+                    display: "color"
+                }
+            }
         }
     }
 }
