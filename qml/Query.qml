@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Qt.labs.qmlmodels
+import rocky.database
 
 ColumnLayout {
     // 根据行数更新行号宽度
@@ -69,53 +69,19 @@ ColumnLayout {
 
         TableView {
             anchors.fill: parent
-
-            //clip: true
+            clip: true
             columnSpacing: 1
             rowSpacing: 1
 
-            ScrollBar.horizontal: ScrollBar {
-            }
-            ScrollBar.vertical: ScrollBar {
-            }
             delegate: Rectangle {
-                border.color: "#CCCCCC" // 设置边框颜色为 #CCCCCC
-                border.width: 1
                 implicitHeight: 50
                 implicitWidth: 100
 
                 Text {
-                    anchors.centerIn: parent
                     text: display
-                }
-                MouseArea {
-                    anchors.fill: parent
-
-                    //onClicked: parent.model.value = !parent.value
                 }
             }
             model: TableModel {
-                rows: [
-                    {
-                        "name": "cat",
-                        "color": "black"
-                    },
-                    {
-                        "name": "dog",
-                        "color": "brown"
-                    },
-                    {
-                        "name": "bird",
-                        "color": "white"
-                    }
-                ]
-
-                TableModelColumn {
-                    display: "name"
-                }
-                TableModelColumn {
-                    display: "color"
-                }
             }
         }
     }

@@ -27,7 +27,7 @@ qt_add_qml_module(desktop
         qml/Tables.qml
         qml/Query.qml
     SOURCES
-        mysql.h mysql.cpp
+        mysql.h mysql.cpp table.h table.cpp
     RESOURCES
         icons/table-small@2x.png
         icons/toolbar-switch-to-sql@2x.png
