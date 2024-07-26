@@ -74,10 +74,12 @@ ColumnLayout {
             rowSpacing: 1
 
             delegate: Rectangle {
+                //border.width: 1
                 implicitHeight: 50
                 implicitWidth: 100
 
                 Text {
+                    anchors.centerIn: parent
                     text: display
                 }
             }

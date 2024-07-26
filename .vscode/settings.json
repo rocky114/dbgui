@@ -26,7 +26,8 @@
         "qsqlquery": "cpp",
         "qdebug": "cpp",
         "qsqlerror": "cpp",
-        "*.qml": "qml"
+        "*.qml": "qml",
+        "qabstracttablemodel": "cpp"
     },
     "cmake.buildDirectory": "${workspaceFolder}/out/build/database",
     "editor.formatOnSave": true,

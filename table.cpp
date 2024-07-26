@@ -2,12 +2,12 @@
 
 int TableModel::rowCount(const QModelIndex &parent) const
 {
-    return 10;
+    return 6;
 }
 
 int TableModel::columnCount(const QModelIndex &parent) const
 {
-    return 10;
+    return 6;
 }
 
 QVariant TableModel::data(const QModelIndex &index, int role) const
