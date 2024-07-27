@@ -23,7 +23,6 @@ qt_add_qml_module(desktop
         qml/Main.qml
         qml/Toolbar.qml
         qml/Initial.qml
-        qml/Databases.qml
         qml/Tables.qml
         qml/Query.qml
     SOURCES

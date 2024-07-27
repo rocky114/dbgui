@@ -8,6 +8,7 @@ RowLayout {
 
         Layout.preferredHeight: root.toolbarHeight
         Layout.preferredWidth: 200
+        color: "transparent"
 
         ComboBox {
             id: comboBox
@@ -65,6 +66,7 @@ RowLayout {
 
         Layout.preferredHeight: root.toolbarHeight
         Layout.preferredWidth: 60
+        color: "transparent"
 
         ColumnLayout {
             anchors.fill: parent
@@ -91,6 +93,7 @@ RowLayout {
 
         Layout.preferredHeight: root.toolbarHeight
         Layout.preferredWidth: 60
+        color: "transparent"
 
         ColumnLayout {
             anchors.fill: parent
@@ -117,6 +120,7 @@ RowLayout {
 
         Layout.preferredHeight: root.toolbarHeight
         Layout.preferredWidth: 60
+        color: "transparent"
 
         ColumnLayout {
             anchors.fill: parent
