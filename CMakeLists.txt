@@ -30,7 +30,9 @@ qt_add_qml_module(desktop
         mysql.h mysql.cpp table.h table.cpp
     RESOURCES
         icons/table-small@2x.png
-        icons/toolbar-switch-to-sql@2x.png
+        icons/toolbar-switch-to-structure.png
+        icons/toolbar-switch-to-content.png
+        icons/toolbar-switch-to-sql.png
 )
 
 target_link_libraries(desktop PRIVATE

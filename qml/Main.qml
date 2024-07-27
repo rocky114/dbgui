@@ -22,20 +22,9 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 2
 
-        RowLayout {
-            Databases {
-                id: databasesContainer
+        Toolbar {
+            id: toolbarContainer
 
-            }
-            Toolbar {
-                id: toolbarContainer
-
-            }
-            Rectangle {
-                Layout.preferredHeight: 50
-                Layout.preferredWidth: 200
-                color: "#00ff00"
-            }
         }
         RowLayout {
             spacing: 2
