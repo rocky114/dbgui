@@ -27,7 +27,7 @@ ApplicationWindow {
 
         }
         RowLayout {
-            spacing: 2
+            spacing: 0
 
             Tables {
                 id: tablesContainer

@@ -14,7 +14,8 @@ ColumnLayout {
         }
     }
 
-    //color: "lightgray"
+    spacing: 0
+
     Rectangle {
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -61,6 +62,21 @@ ColumnLayout {
 
                 onLineCountChanged: updateLineNumberWidth() // 监听行数变化
             }
+        }
+    }
+    Rectangle {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 36
+        //border.color: "#bdbcbc"
+        //border.width: 1
+        color: "transparent"
+
+        Button {
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            text: "运行所选SQL"
+
+            onClicked: console.log("Button clicked")
         }
     }
     Rectangle {
