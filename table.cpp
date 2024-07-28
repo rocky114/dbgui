@@ -1,5 +1,19 @@
 #include "table.h"
 
+/*
+TableModel *TableModel::m_instance = nullptr;
+
+TableModel *TableModel::instance()
+{
+    if (m_instance == nullptr)
+    {
+        m_instance = new TableModel;
+    }
+
+    return m_instance;
+}
+*/
+
 int TableModel::rowCount(const QModelIndex &parent) const
 {
     return 6;
