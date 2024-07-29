@@ -76,7 +76,17 @@ ColumnLayout {
             anchors.right: parent.right
             text: "运行所选SQL"
 
-            onClicked: console.log("Button clicked")
+            onClicked: sqlQueryModel.executeQuery(textEdit.text)
+        }
+    }
+    TableModel {
+        id: sqlQueryModel
+
+        onDataChanged: {
+            tableView.forceLayout();
+        }
+        onHeaderDataChanged: {
+            tableView.model.headerDataChanged(Qt.Horizontal, 0, tableView.columnCount - 1);
         }
     }
     Rectangle {
@@ -85,9 +95,12 @@ ColumnLayout {
         color: "transparent"
 
         TableView {
+            id: tableView
+
             anchors.fill: parent
             clip: true
             columnSpacing: 1
+            model: sqlQueryModel
             rowSpacing: 1
 
             delegate: Rectangle {
@@ -99,8 +112,6 @@ ColumnLayout {
                     anchors.centerIn: parent
                     text: display
                 }
-            }
-            model: TableModel {
             }
         }
     }
