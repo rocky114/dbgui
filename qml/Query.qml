@@ -67,8 +67,6 @@ ColumnLayout {
     Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 36
-        //border.color: "#bdbcbc"
-        //border.width: 1
         color: "transparent"
 
         Button {
@@ -86,7 +84,7 @@ ColumnLayout {
             tableView.forceLayout();
         }
         onHeaderDataChanged: {
-            tableView.model.headerDataChanged(Qt.Horizontal, 0, tableView.columnCount - 1);
+            tableView.forceLayout();
         }
     }
     Rectangle {
@@ -94,23 +92,38 @@ ColumnLayout {
         Layout.fillWidth: true
         color: "transparent"
 
-        TableView {
-            id: tableView
-
+        ColumnLayout {
             anchors.fill: parent
-            clip: true
-            columnSpacing: 1
-            model: sqlQueryModel
-            rowSpacing: 1
+            spacing: 0
 
-            delegate: Rectangle {
-                //border.width: 1
-                implicitHeight: 50
-                implicitWidth: 100
+            HorizontalHeaderView {
+                id: horizontalHeader
 
-                Text {
-                    anchors.centerIn: parent
-                    text: display
+                Layout.fillWidth: true
+                clip: true
+                syncView: tableView
+            }
+            TableView {
+                id: tableView
+
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                boundsBehavior: Flickable.ContinueAtBounds // 允许继续滚动
+                clip: true
+                columnSpacing: 1
+                columnWidthProvider: function (column) {}
+                flickableDirection: Flickable.HorizontalFlick // 允许横向滚动
+                model: sqlQueryModel
+                rowSpacing: 1
+
+                delegate: Rectangle {
+                    implicitHeight: 30
+                    implicitWidth: 100
+
+                    Label {
+                        anchors.centerIn: parent
+                        text: display
+                    }
                 }
             }
         }

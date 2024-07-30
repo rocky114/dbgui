@@ -45,9 +45,9 @@ signals:
     void columnCountChanged();
 
 private:
-    QSqlQuery m_query;
-    QVector<QVector<QVariant>> m_data;
-    QVector<QString> m_headers;
+    QSqlQuery m_query{};
+    QVector<QVector<QVariant>> m_data{};
+    QVector<QString> m_headers{};
 };
 
 #endif

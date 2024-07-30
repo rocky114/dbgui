@@ -2,20 +2,6 @@
 #include <QSqlError>
 #include <QSqlRecord>
 
-/*
-TableModel *TableModel::m_instance = nullptr;
-
-TableModel *TableModel::instance()
-{
-    if (m_instance == nullptr)
-    {
-        m_instance = new TableModel;
-    }
-
-    return m_instance;
-}
-*/
-
 TableModel::TableModel(QObject *parent) : QAbstractTableModel{parent}
 {
 }
@@ -59,13 +45,11 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation, int ro
 
 QHash<int, QByteArray> TableModel::roleNames() const
 {
-    return {{Qt::DisplayRole, "display"}};
+    return {{Qt::DisplayRole, "display"}, {Qt::UserRole + 1, "internalData"}};
 }
 
 void TableModel::executeQuery(const QString &sqlQuery)
 {
-    qDebug() << "execute sql:" << sqlQuery;
-
     if (m_query.exec(sqlQuery))
     {
         m_data.clear();
