@@ -118,9 +118,11 @@ ColumnLayout {
 
                 delegate: Rectangle {
                     implicitHeight: 30
-                    implicitWidth: 100
+                    implicitWidth: Math.max(100, tableItemText.implicitWidth + 10)
 
                     Label {
+                        id: tableItemText
+
                         anchors.centerIn: parent
                         text: display
                     }
